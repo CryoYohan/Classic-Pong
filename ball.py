@@ -1,5 +1,4 @@
 from turtle import Turtle
-from random import randint
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
@@ -7,11 +6,16 @@ class Ball(Turtle):
         self.color('red')
         self.penup()
         self.pensize(30)
+        self.x = 10
+        self.y = 10
 
-    def move(self,**kwargs):
-        new_y = self.ycor() + kwargs.get('y')
-        new_x = self.xcor() + kwargs.get('x')
+    def move(self):
+        new_y = self.ycor() + self.y
+        new_x = self.xcor() + self.x
         self.goto(new_x,new_y)
 
     def bounce(self):
-        pass
+        self.y *= -1
+    def hit(self):
+        self.x *= -1
+

@@ -35,26 +35,20 @@ class Window(Turtle):
 
         # Update Screen while game is running
         self.game_running = True
-        self.x = 10
-        self.y = 10
         while self.game_running:
             sleep(0.1)
             self.window.update()
-            self.ball.move(x=self.x,y=self.y)
-            if self.ball.ycor() == 280:
-                self.y = -10
-                self.ball.move(x=self.x,y=self.y)
-            elif self.ball.ycor() == -280:
-                self.y = 10
-                self.ball.move(x=self.x,y=self.y)
-            elif self.ball.xcor() == 380:
-                self.x = -10
-                self.ball.move(x=self.x,y=self.y)
-            elif self.ball.xcor() == -380:
-                self.x = 10
-                self.ball.move(x=self.x,y=self.y)
-            print(self.ball.xcor(),self.ball.ycor())
-
+            # Move ball
+            self.ball.move()
+            # Detect wall collisions then ball bounce
+            if self.ball.ycor() == 280 or self.ball.ycor() == -280:
+                self.ball.bounce()
+            # Detect paddle right
+            if self.ball.xcor() == self.paddles_right.xcor():
+                self.ball.hit()
+            # Detect paddle left
+            if self.ball.xcor() == self.paddles_left.xcor():
+                self.ball.hit()
 
         self.window.exitonclick()
         self.window.mainloop()
