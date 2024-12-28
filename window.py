@@ -14,5 +14,14 @@ class Window(Turtle):
         self.window.bgcolor('black')
         self.window.title('Pong')
 
+        # Listen Keys
+        self.window.listen()
+
+        self.window.onkey(self.paddles.go_up_left, 'w')
+        self.window.onkey(self.paddles.go_down_left, 's')
+
+        self.window.onkey(self.paddles.go_up_right, 'Up')
+        self.window.onkey(self.paddles.go_down_right, 'Down')
+
         self.window.exitonclick()
         self.window.mainloop()

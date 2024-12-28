@@ -4,8 +4,8 @@ class Paddle:
         # Initialize Variables
         self.WIDTH = 20
         self.HEIGHT = 100
-        self.LEFT_XCOR = 350
-        self.RIGHT_XCOR = -350
+        self.LEFT_XCOR = -350
+        self.RIGHT_XCOR = 350
         self.YCOR = 0
         # Initialize left and right turtle paddles
         self.left = Turtle()
@@ -31,13 +31,21 @@ class Paddle:
         self.left.shapesize(5, 1)
         self.left.color('white')
 
-    # Control keys for the left and right paddles
-    def go_up(self):
-        self.left.setx(self.YCOR + 10)
+    # Control keys for the left paddles
+    def go_up_left(self):
+        new_y = self.left.ycor() + 20
+        self.left.goto(self.left.xcor(), new_y)
 
-    def go_down(self):
-        self.left.setx(self.YCOR - 10)
+    def go_down_left(self):
+        new_y = self.left.ycor() - 20
+        self.left.goto(self.left.xcor(), new_y)
 
+    # Control keys for the right paddles
+    def go_up_right(self):
+        new_y = self.right.ycor() + 20
+        self.right.goto(self.right.xcor(), new_y)
 
-
+    def go_down_right(self):
+        new_y = self.right.ycor() - 20
+        self.right.goto(self.right.xcor(), new_y)
 
