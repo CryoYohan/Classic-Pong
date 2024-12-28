@@ -36,19 +36,35 @@ class Window(Turtle):
         # Update Screen while game is running
         self.game_running = True
         while self.game_running:
-            sleep(0.1)
+            try:
+                sleep(self.ball.move_speed)
+            except ValueError:
+                print('Move speed value turns negative.')
+                self.ball.reset_position()
+
             self.window.update()
+
             # Move ball
             self.ball.move()
             # Detect wall collisions then ball bounce
-            if self.ball.ycor() == 280 or self.ball.ycor() == -280:
-                self.ball.bounce()
-            # Detect paddle right
-            if self.ball.xcor() == self.paddles_right.xcor():
-                self.ball.hit()
-            # Detect paddle left
-            if self.ball.xcor() == self.paddles_left.xcor():
-                self.ball.hit()
+            if self.ball.ycor() > 280 or self.ball.ycor() < -280:
+                self.ball.bounce_y()
+
+            # Detect paddle right and left
+            if self.ball.distance(self.paddles_right) < 50 and self.ball.xcor() > 320 or self.ball.distance(self.paddles_left) < 50 and self.ball.xcor() < -320:
+                self.ball.bounce_x()
+
+            # Detect ball out of bounds RIGHT and sets ball coordinates to center (0,0)
+            if self.ball.xcor() > 380:
+                self.scoreboard.l_point()
+                self.scoreboard.update_scoreboard()
+                self.ball.reset_position()
+
+            # Detect ball out of bounds LEFT and sets ball coordinates to center (0,0)
+            if self.ball.xcor() < -380:
+                self.scoreboard.r_point()
+                self.scoreboard.update_scoreboard()
+                self.ball.reset_position()
 
         self.window.exitonclick()
         self.window.mainloop()
