@@ -1,3 +1,2 @@
-from window import *
-
+from window import Window
 window = Window()

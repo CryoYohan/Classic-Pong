@@ -1,32 +1,18 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
+from scoreboard import Scoreboard
 class Window(Turtle):
     def __init__(self):
         super().__init__()
+        # Initialize modules
         self.paddles = Paddle()
-        self.net = Turtle()
-        self.net.hideturtle()
-        self.net.speed('fastest')
-        self.net.pensize(10)
-        self.net.color('white')
-        self.net.pencolor('white')
+        self.scoreboard = Scoreboard()
         self.window = Screen()
+        # Setup window
         self.window.colormode(255)
         self.window.setup(800,600)
         self.window.bgcolor('black')
+        self.window.title('Pong')
+
         self.window.exitonclick()
         self.window.mainloop()
-
-    def draw_net(self):
-        self.net.penup()
-        self.net.goto(0,-300)
-        self.net.pendown()
-        self.net.left(90)
-        for _ in range(15):
-            self.net.penup()
-            self.net.forward(20)
-            self.net.pendown()
-            self.net.forward(20)
-        print(self.net.position())
-
-
